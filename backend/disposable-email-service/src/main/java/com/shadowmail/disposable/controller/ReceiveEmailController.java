@@ -17,8 +17,12 @@ public class ReceiveEmailController {
     private EmailReceiverService emailReceiverService;
 
     @PostMapping("receive")
-    private ResponseEntity<String> receiveEmail(@RequestBody EmailContent emailContent){
-        var result = emailReceiverService.receiveEmail(emailContent);
-        return ResponseEntity.ok("Email received and moved to disposable inbox");
+    private ResponseEntity<String> receiveEmail(@RequestBody EmailContent emailContent) {
+        try {
+            emailReceiverService.receiveEmail(emailContent);
+            return ResponseEntity.ok("Email received and moved to disposable inbox");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error processing email: " + e.getMessage());
+        }
     }
 }
