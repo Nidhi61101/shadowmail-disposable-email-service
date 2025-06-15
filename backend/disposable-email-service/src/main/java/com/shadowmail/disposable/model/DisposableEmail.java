@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -28,5 +29,8 @@ public class DisposableEmail {
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive = true;
+
+    @OneToMany(mappedBy = "disposableEmail", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Email> emails;
 
 }
