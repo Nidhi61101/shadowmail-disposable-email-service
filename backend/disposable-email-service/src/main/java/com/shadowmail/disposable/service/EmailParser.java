@@ -28,6 +28,9 @@ public class EmailParser {
     @Autowired
     private DisposableEmailRepository disposableEmailRepository;
 
+    @Autowired
+    private EmailClassifierService emailClassifierService;
+
     public void parseAndStoreEmailContent(InputStream data) {
         Session session = Session.getInstance(new Properties());
         try {
@@ -41,9 +44,11 @@ public class EmailParser {
             } else if (message.getContent() instanceof Multipart multipart) {
                 for (int i = 0; i < multipart.getCount(); i++) {
                     BodyPart part = multipart.getBodyPart(i);
-                    if (part.getContent() instanceof String) {
+                    if (part.isMimeType("text/plain")) {
                         receivedEmail.setBody(part.getContent().toString());
                         break;
+                    } else if (part.isMimeType("text/html")) {
+                        receivedEmail.setBody(part.getContent().toString());
                     } else {
                         log.error("Unsupported content type: {}", part.getContentType());
                     }
@@ -53,14 +58,13 @@ public class EmailParser {
             }
             log.info("Parsed email content successfully: {}", receivedEmail);
             receivedEmail.setReceivedAt(LocalDateTime.now());
-            receivedEmail.setStatus(SpamStatus.PENDING);
+            receivedEmail.setStatus(emailClassifierService.classifyText(receivedEmail.getBody()));
             DisposableEmail disposableEmail = disposableEmailRepository.findByEmailAddress(receivedEmail.getToAddress())
-                    .orElseThrow( ()-> new RuntimeException("Dispoable email address not found"));
+                    .orElseThrow(() -> new RuntimeException("Disposable email address not found"));
             receivedEmail.setDisposableEmail(disposableEmail);
             receivedEmailRepository.save(receivedEmail);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+
+        } catch (MessagingException| IOException e) {
             throw new RuntimeException(e);
         }
     }

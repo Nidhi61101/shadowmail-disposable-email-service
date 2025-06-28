@@ -28,7 +28,7 @@ public class DisposableEmailService {
         DisposableEmail email = new DisposableEmail();
         String emailAddress = generateEmailAddress();
         email.setCreatedAt(LocalDateTime.now());
-        email.setExpiresAt(LocalDateTime.now().plusMinutes(60));
+        email.setExpiresAt(LocalDateTime.now().plusDays(60));
         email.setEmailAddress(emailAddress);
         disposableEmailRepository.save(email);
         log.info("Created new disposable email address: {}", emailAddress);

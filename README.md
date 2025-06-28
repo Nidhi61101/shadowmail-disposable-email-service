@@ -75,6 +75,7 @@ You want to sign up for a free trial of a tool, but don't trust it with your pri
 ## 🧩 ML Classifier (Brief)
 
 - Input: Email subject + body
+- pip install flask scikit-learn pandas
 - Model: Logistic Regression / Naive Bayes / BERT (upgrade later)
 - Output: `Spam` or `Not Spam`
 
