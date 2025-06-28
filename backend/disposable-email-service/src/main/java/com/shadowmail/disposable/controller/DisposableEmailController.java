@@ -2,10 +2,7 @@ package com.shadowmail.disposable.controller;
 
 
 import com.shadowmail.disposable.model.DisposableEmail;
-import com.shadowmail.disposable.model.Email;
-import com.shadowmail.disposable.model.EmailContent;
 import com.shadowmail.disposable.model.EmailDTO;
-import com.shadowmail.disposable.repository.DisposableEmailRepository;
 import com.shadowmail.disposable.service.DisposableEmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,13 +38,12 @@ public class DisposableEmailController {
 
     @GetMapping("inbox")
     public ResponseEntity<?> getInbox(@RequestParam String emailAddress){
-        log.info("Fetching inbox for disposable email address: {}",emailAddress);
         try {
             List<EmailDTO> inbox = disposableEmailService.getInbox(emailAddress);
             return ResponseEntity.ok(inbox);
         }catch (Exception e){
-            log.error("Error fetching inbox for {}: {}",emailAddress,e.getMessage());
-            return ResponseEntity.badRequest().body("Error fetching inbox:{} " + e.getMessage());
+            log.error("Error fetching inbox for {} : {}",emailAddress,e.getMessage());
+            return ResponseEntity.badRequest().body("Error fetching inbox:" + e.getMessage());
         }
     }
 }

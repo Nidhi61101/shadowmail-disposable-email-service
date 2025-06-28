@@ -11,5 +11,6 @@ public class EmailDTO {
     private String subject;
     private String content;
     private LocalDateTime receivedAt;
+    private String status;
 }
 

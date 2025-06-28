@@ -64,8 +64,9 @@ public class DisposableEmailService {
                     dto.setId(email.getId().toString());
                     dto.setFromAddress(email.getFromAddress());
                     dto.setSubject(email.getSubject());
-                    dto.setContent(email.getContent());
+                    dto.setContent(email.getBody());
                     dto.setReceivedAt(email.getReceivedAt());
+                    dto.setStatus(String.valueOf(email.getStatus()));
                     return dto;
                 })
                 .collect(Collectors.toList());

@@ -31,6 +31,6 @@ public class DisposableEmail {
     private boolean isActive = true;
 
     @OneToMany(mappedBy = "disposableEmail", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Email> emails;
+    private List<ReceivedEmail> emails;
 
 }
