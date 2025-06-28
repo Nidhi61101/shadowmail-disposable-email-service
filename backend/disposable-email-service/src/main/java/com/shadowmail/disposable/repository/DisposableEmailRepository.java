@@ -11,5 +11,5 @@ public interface DisposableEmailRepository extends JpaRepository<DisposableEmail
 
     boolean existsByEmailAddress(String s);
 
-    Optional<DisposableEmail> findByEmailAddress(String receiptentEmail);
+    Optional<DisposableEmail> findByEmailAddress(String recipientEmail);
 }
