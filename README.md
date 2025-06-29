@@ -34,49 +34,28 @@ You want to sign up for a free trial of a tool, but don't trust it with your pri
 |--------------|----------------------------------|
 | Backend       | Java, Spring Boot               |
 | ML Spam Filter| Python (scikit-learn), FastAPI or embedded model |
-| Database      | PostgreSQL / MongoDB            |
-| Messaging     | RabbitMQ or Kafka (for async email queue) |
-| Email Service | SMTP via Mailgun / Amazon SES / SendGrid |
+| Database      | PostgreSQL          |
+| Email Service | SMTP via Mailgun  |
 | Frontend (opt)| React.js (Dashboard)            |
 | DevOps (opt)  | Docker, Kubernetes, GitHub Actions |
 
----
-
-## 🧠 Database Design (Sample)
-
-### Users Table
-| Field       | Type       |
-|-------------|------------|
-| id          | UUID       |
-| email       | String     |
-| created_at  | Timestamp  |
-
-### Aliases Table
-| Field       | Type       |
-|-------------|------------|
-| id          | UUID       |
-| alias_email | String     |
-| user_id     | UUID (FK)  |
-| active      | Boolean    |
-| expires_at  | Timestamp  |
-
-### Emails Table
-| Field       | Type       |
-|-------------|------------|
-| id          | UUID       |
-| alias_id    | UUID (FK)  |
-| subject     | String     |
-| body        | Text       |
-| is_spam     | Boolean    |
-| received_at | Timestamp  |
-
----
 
 ## 🧩 ML Classifier (Brief)
 
 - Input: Email subject + body
 - pip install flask scikit-learn pandas
 - Model: Logistic Regression / Naive Bayes / BERT (upgrade later)
-- Output: `Spam` or `Not Spam`
+- Output: `Spam` or `Ham`
 
-We’ll train on a dataset like Enron Spam or Apache SpamAssassin to begin.
+## How to run it in local 
+- run the table scripts required for the project present under src/resources of backend folder 
+- Start the spring boot application 
+- Start the python application using python app.py 
+- send a test email using the script
+- run the front end program using npm start 
+
+## functionality completed till now 
+ - User can generate a new shadow mail and the expiry time will appear in the snackbar
+ - User can paste one of the old shadow mail generated its corresponding expiry will be printed in the snackbar 
+ - User can then view the emails received by the shadow mail address 
+ - If the emails are not present/ email is expired corresponding error will be printed in the UI
