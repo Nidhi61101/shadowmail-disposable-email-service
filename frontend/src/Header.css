@@ -1,0 +1,45 @@
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.email-info {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.email-input {
+  padding: 6px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.email-expiry {
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+
+.btn {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  background: #45a049;
+}
+
+.generate-btn {
+  background: #2196f3;
+}

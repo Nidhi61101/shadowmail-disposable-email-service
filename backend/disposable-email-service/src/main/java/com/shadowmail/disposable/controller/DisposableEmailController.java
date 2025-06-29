@@ -32,7 +32,6 @@ public class DisposableEmailController {
         DisposableEmail email = disposableEmailService.createEmailAddress();
         Map<String, String> response = new HashMap<>();
         response.put("EmailAddress", email.getEmailAddress());
-        response.put("ExpiresAt", email.getExpiresAt().toString());
         return ResponseEntity.ok(response);
     }
 

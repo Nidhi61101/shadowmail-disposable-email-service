@@ -1,0 +1,31 @@
+.email-list-container {
+  padding: 20px;
+}
+
+.email-list {
+  list-style: none;
+  padding: 0;
+}
+
+.email-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.email-item:hover {
+  background: #f9f9f9;
+}
+
+.email-subject {
+  font-weight: bold;
+}
+
+.email-meta {
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  gap: 15px;
+}
